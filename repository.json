@@ -1,0 +1,20 @@
+[
+    {
+        "flight_number": "504N",
+        "departure_date": "02/05/2023",
+        "departure_time": "18:30",
+        "flight_duration": "03.30",
+        "departure_airport_code": "KUF",
+        "arrival_airport_code": "LED",
+        "ticket_price": 7500.0
+    },
+    {
+        "flight_number": "211U",
+        "departure_date": "05/05/2023",
+        "departure_time": "10:15",
+        "flight_duration": "07.20",
+        "departure_airport_code": "KZN",
+        "arrival_airport_code": "MMK",
+        "ticket_price": 15000.0
+    }
+]
