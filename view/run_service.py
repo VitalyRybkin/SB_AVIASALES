@@ -1,4 +1,4 @@
-import controller.validate_input as validate
+from controller.validate_input import Validate as validate
 from controller.flight import Flight
 from controller.user_controller import UserController as controller
 
@@ -12,6 +12,7 @@ class RunService:
         self.__cmd = cmd
         self.flight = Flight
         self.controller = controller()
+        self.validate = validate()
 
     @property
     def get_cmd(self):
@@ -46,7 +47,7 @@ class RunService:
             print('\n'.join('{}: {}'.format(k, v) for k, v in commands_dict.items()))
 
             cmd_input = input('\nВведите номер пункта меню: ')
-            cmd_input = validate.cmd_input(commands_dict, cmd_input)
+            cmd_input = self.validate.cmd_input(commands_dict, cmd_input)
 
             if cmd_input == 0:
                 self.controller.save_to_repo()
@@ -61,25 +62,25 @@ class RunService:
         """
         print('\nВведите данные рейса:')
         flight_number = input('XXXХ - номер рейса: ').upper().strip()
-        flight_number = validate.flight_num_input(flight_number)
+        flight_number = self.validate.flight_num_input(flight_number)
 
         departure_date = input('ДД/ММ/ГГГГ - дата рейса: ').upper().strip()
-        departure_date = validate.date_input(departure_date)
+        departure_date = self.validate.date_input(departure_date)
 
         departure_time = input('ЧЧ:ММ - время вылета: ').upper().strip()
-        departure_time = validate.time_input(departure_time)
+        departure_time = self.validate.time_input(departure_time)
 
         flight_duration = input('ЧЧ.ММ - длительность полёта: ').upper().strip()
-        flight_duration = validate.flight_duration_input(flight_duration)
+        flight_duration = self.validate.flight_duration_input(flight_duration)
 
         departure_airport_code = input('XXX - аэропорт вылета: ').upper().strip()
-        departure_airport_code = validate.airport_code_input(departure_airport_code)
+        departure_airport_code = self.validate.airport_code_input(departure_airport_code)
 
         arrival_airport_code = input('XXX - аэропорт назначения: ').upper().strip()
-        arrival_airport_code = validate.airport_code_input(arrival_airport_code)
+        arrival_airport_code = self.validate.airport_code_input(arrival_airport_code)
 
         ticket_price = input('.XX - стоимость билета: ').strip()
-        ticket_price = validate.ticket_price_input(ticket_price)
+        ticket_price = self.validate.ticket_price_input(ticket_price)
 
         flight_to_add = self.flight(flight_number,
                                     departure_date,
@@ -98,7 +99,7 @@ class RunService:
         :return: Нет
         """
         flight_number = input('Введите номер рейса в формате ХХХХ: ')
-        flight_number = validate.flight_num_input(flight_number)
+        flight_number = self.validate.flight_num_input(flight_number)
         flight = self.controller.search_flight(flight_number)
         if flight:
             print(flight)
